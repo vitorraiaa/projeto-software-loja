@@ -49,4 +49,10 @@ jobs:
         script: |
           docker stop loja
           docker rm --force loja
-          docker run -d -p 8081:8081 --name loja --network=rede vitorraia10/loja-ci:${{ github.sha }}
+          docker run -d -p 8081:8081 \
+           -e USER_DB=${{ secrets.USER_DB }} \
+           -e PASS_DB=${{ secrets.PASS_DB }} \
+           -e PATH_DB=${{ secrets.PATH_DB }} \
+           -e NAME_DB=${{ secrets.NAME_DB }} \
+           -e REDIS_HOST=redis \
+           --name loja --network=rede vitorraia10/loja-ci:${{ github.sha }}
