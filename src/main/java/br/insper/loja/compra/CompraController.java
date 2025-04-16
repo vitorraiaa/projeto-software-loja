@@ -18,7 +18,8 @@ public class CompraController {
     }
 
     @PostMapping
-    public Compra salvarCompra(@RequestBody Compra compra) {
-        return compraService.salvarCompra(compra);
+    public Compra salvarCompra(@RequestHeader(name = "Authorization") String token,
+                               @RequestBody Compra compra) {
+        return compraService.salvarCompra(token, compra);
     }
 }
